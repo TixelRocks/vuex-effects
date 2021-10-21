@@ -1,7 +1,45 @@
+import _every from 'lodash/every';
+import _some from 'lodash/some';
+
 const VuexEffects = (store, effectsList = []) => ({
   install(VueGlobal) {
+    function matchComponentProps(path, action) {
+      const effectMatchers = path[action.type].matchComponentProps;
+      if(effectMatchers.length > 0
+        && !_every(effectMatchers, (propertyToMatch) => {
+          if (!action?.payload?.match) {
+            console.error('[vuex-effects] matchComponentProps is set and expects the action sends a payload with match');
+            return false;
+          }
+
+          if (typeof this?.[propertyToMatch] === undefined) {
+            console.error(`[vuex-effects] matchComponentProps is set and expects the component to have props "${effectMatchers}". "${propertyToMatch}", doesn't exist, you need to set this in the component props`);
+            return false;
+          }
+
+          return _some(action.payload.match, (match) => {
+            if (!match?.[propertyToMatch]) {
+              console.error(`[vuex-effects] matchComponentProps is set and expects the action to send, "${propertyToMatch}" as a property in the match array, this action is sending "${Object.keys(match)}"`);
+              return false;
+            }
+
+            return match[propertyToMatch] === this[propertyToMatch];
+          });
+
+          })) {
+          // do not execute the action as it needs to match all properties
+          return true;
+      }
+    }
+
     function callActionEffect(effectsPath, stage, action, state, prepend = false) {
       const actionsPath = effectsPath.actions;
+
+      // matchComponentProps will match the component properties from the component
+      // and the action
+      if (matchComponentProps.apply(this, [actionsPath, action])) {
+        return;
+      }
 
       // exit if effect's prepend not the same as subscriber
       if (typeof actionsPath[action.type] === 'object') {

@@ -2,8 +2,11 @@
   "name": "vuex-effects",
   "version": "1.0.0",
   "description": "Effects is a side effect model for Vuex. Effects use subscribers to provide new sources of actions such as network requests, web socket messages and time-based events.",
-  "main": "vuex-effects.js",
+  "main": "dist/vuex-effects.js",
   "scripts": {
+    "build": "babel vuex-effects.js --out-dir dist",
+    "watch": "npm run build -- --watch",
+    "prepare": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,5 +26,13 @@
   "bugs": {
     "url": "https://github.com/Winexcel/vuex-effects/issues"
   },
-  "homepage": "https://github.com/Winexcel/vuex-effects#readme"
+  "homepage": "https://github.com/Winexcel/vuex-effects#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.15.7",
+    "@babel/core": "^7.15.8",
+    "@babel/preset-env": "^7.15.8"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
 }
