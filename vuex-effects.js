@@ -5,7 +5,7 @@ const VuexEffects = (store, effectsList = []) => ({
   install(VueGlobal) {
     function matchComponentProps(path, action) {
       const effectMatchers = path[action.type].matchComponentProps;
-      if(effectMatchers.length > 0
+      if(effectMatcher && effectMatchers.length > 0
         && !_every(effectMatchers, (propertyToMatch) => {
           if (!action?.payload?.match) {
             console.error('[vuex-effects] matchComponentProps is set and expects the action sends a payload with match');
