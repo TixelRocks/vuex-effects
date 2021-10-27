@@ -4,10 +4,33 @@ Effects is a side effect model for Vuex. Effects use subscribers to provide new 
 
 - [Basic example](https://codesandbox.io/s/vuex-effects-1-92hqr)
 
+## Fork
+
+This repo has been forked from the original and adds some additional features:
+
+- [Including in package.json](#package.json)
+- [Babel compilation](#building)
+- [Correlated effects](#effects-options)
+
+
 ## Installation
 
 ```bash
 $ npm install vuex-effects
+```
+
+### Including in package.json
+
+As this is not an npm package, just a forked repo, you will need ot include the project in your `package.json` file like this:
+
+```
+"vuex-effects": "github:ianjamieson/vuex-effects",
+```
+
+You can achieve this by running:
+
+```baseh
+$ npm install ianjamieson/vuex-effects --save
 ```
 
 ## Usage
@@ -152,6 +175,44 @@ effects: {
 }
 ```
 
+#### Correlated actions
+
+The forked repo adds additional functionality so that you can correlate dispatched actions with a particular component, let's take a look at an example:
+
+```js
+props: {
+    name: {
+        default: '',
+        type: String
+    }
+},
+effects: {
+    actions: {
+        'tasks/getTasksList': {
+            matchComponentProps: ['name'],
+            before() {
+                // do something for this named component
+            },
+        },
+     }
+}
+```
+
+You could include the above component like this:
+
+```html
+<my-component name="uniqueName"></my-component>
+```
+
+Then to ensure that an effect runs for only this component then dispatch within another Vue component like this:
+
+```js
+this.$store.dispatch('tasks/getTasksList', { match: [{name: 'uniqueName' }] })
+```
+
+**Note**: Correlated actions do not apply for mutations.
+
+
 ### Mutations
 Mutations effects is called after every mutation and receives the mutation descriptor and post-mutation state as arguments.
 Mutations doesn't have `before` and `after` methods unlike Actions, only the `handler` method is avalable in object notation.
@@ -185,4 +246,16 @@ effects: {
         }
     }
 }
+```
+
+## Building
+
+If you want to make changes to the code then you can build and watch scripts are in `package.json`:
+
+```bash
+$ npm run build
+$ npm run watch
+```
+
+
 
