@@ -8,7 +8,7 @@ Effects is a side effect model for Vuex. Effects use subscribers to provide new 
 
 This repo has been forked from the original and adds some additional features:
 
-- [Including in package.json](#package.json)
+- [Including in package.json](#including-in-packagejson)
 - [Babel compilation](#building)
 - [Correlated effects](#effects-options)
 
