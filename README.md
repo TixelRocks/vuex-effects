@@ -10,7 +10,7 @@ This repo has been forked from the original and adds some additional features:
 
 - [Including in package.json](#including-in-packagejson)
 - [Babel compilation](#building)
-- [Correlated effects](#effects-options)
+- [Correlated effects](#correlated-actions)
 
 
 ## Installation
