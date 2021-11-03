@@ -1,7 +1,7 @@
 {
-  "name": "vuex-effects",
+  "name": "@tixel/vuex-correlated-effects",
   "version": "1.0.0",
-  "description": "Effects is a side effect model for Vuex. Effects use subscribers to provide new sources of actions such as network requests, web socket messages and time-based events.",
+  "description": "Correlated effects is a side effect model for Vuex. Correlated effects use subscribers to provide new sources of actions such as network requests, web socket messages and time-based events. Effects can be correlated back to the component that initially dispatched the action by matching on component properties.",
   "main": "dist/vuex-effects.js",
   "scripts": {
     "build": "babel vuex-effects.js --out-dir dist",
@@ -19,6 +19,7 @@
     "Side",
     "Effects",
     "Vuex-Effects",
+    "CorrelatedEffects",
     "VuexEffects"
   ],
   "author": "Winexcel",
