@@ -1,6 +1,6 @@
 {
   "name": "@tixel/vuex-correlated-effects",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Correlated effects is a side effect model for Vuex. Correlated effects use subscribers to provide new sources of actions such as network requests, web socket messages and time-based events. Effects can be correlated back to the component that initially dispatched the action by matching on component properties.",
   "main": "dist/vuex-effects.js",
   "scripts": {
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Winexcel/vuex-effects.git"
+    "url": "git+https://github.com/TixelRocks/vuex-effects.git"
   },
   "keywords": [
     "Vue",
@@ -22,12 +22,12 @@
     "CorrelatedEffects",
     "VuexEffects"
   ],
-  "author": "Winexcel",
+  "author": "Ian Jamieson",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Winexcel/vuex-effects/issues"
+    "url": "https://github.com/TixelRocks/vuex-effects/issues"
   },
-  "homepage": "https://github.com/Winexcel/vuex-effects#readme",
+  "homepage": "https://github.com/TixelRocks/vuex-effects#readme",
   "devDependencies": {
     "@babel/cli": "^7.15.7",
     "@babel/core": "^7.15.8",

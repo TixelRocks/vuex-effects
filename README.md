@@ -8,7 +8,6 @@ Effects is a side effect model for Vuex. Effects use subscribers to provide new 
 
 This repo has been forked from the original and adds some additional features:
 
-- [Including in package.json](#including-in-packagejson)
 - [Babel compilation](#building)
 - [Correlated effects](#correlated-actions)
 
@@ -16,28 +15,14 @@ This repo has been forked from the original and adds some additional features:
 ## Installation
 
 ```bash
-$ npm install vuex-effects
-```
-
-### Including in package.json
-
-As this is not an npm package, just a forked repo, you will need ot include the project in your `package.json` file like this:
-
-```
-"vuex-effects": "github:ianjamieson/vuex-effects",
-```
-
-You can achieve this by running:
-
-```baseh
-$ npm install ianjamieson/vuex-effects --save
+$ npm install @tixel/vuex-correlated-effects
 ```
 
 ## Usage
 
 Import Plugin
 ```js
-import VuexEffects from "vuex-effects";
+import VuexEffects from "@tixel/vuex-correlated-effects";
 
 Vue.use(VuexEffects(store));
 ```
