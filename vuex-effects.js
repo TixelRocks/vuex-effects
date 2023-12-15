@@ -130,10 +130,15 @@ const VuexEffects = (store, effectsList = []) => ({
 
     // register effects for component
     VueGlobal.mixin({
+      beforeUnmount() {
+        if(Array.isArray(this.subscribers)) {
+          this.subscribers.forEach((subscriber) => subscriber());
+        }
+      },
       beforeCreate() {
         const { effects } = this.$options;
         if (effects) {
-          const subscribers = [];
+          this.subscribers = [];
           const effectTypes = Object.keys(effects);
           effectTypes.forEach((effectType) => {
             const effectActionsList = Object.keys(effects[effectType]);
@@ -143,14 +148,14 @@ const VuexEffects = (store, effectsList = []) => ({
             // for actions and mutations
             switch (effectType) {
               case 'actions': {
-                subscribers.push(
+                this.subscribers.push(
                     store.subscribeAction(actionFn.apply(this, [this.$options.effects, effectActionsList])),
                     store.subscribeAction(actionFn.apply(this, [this.$options.effects, effectActionsList, true]), { prepend: true }),
                 );
                 break;
               }
               case 'mutations': {
-                subscribers.push(
+                this.subscribers.push(
                     store.subscribe(mutationFn.apply(this, [this.$options.effects, effectActionsList])),
                     store.subscribe(mutationFn.apply(this, [this.$options.effects, effectActionsList, true]), { prepend: true }),
                 );
@@ -162,9 +167,6 @@ const VuexEffects = (store, effectsList = []) => ({
             }
           });
 
-          this.$once('hook:beforeDestroy', () => {
-            subscribers.forEach((subscriber) => subscriber());
-          });
         }
       },
     });
