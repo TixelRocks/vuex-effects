@@ -1,5 +1,5 @@
-import _every from 'lodash/every';
-import _some from 'lodash/some';
+import _every from 'lodash-es/every.js';
+import _some from 'lodash-es/some.js';
 
 const VuexEffects = (store, effectsList = []) => ({
   install(VueGlobal) {
